@@ -20,7 +20,7 @@ class CreateConsultoriosTable extends Migration
             $table->string('phone');
             $table->string('responsable');
             $table->text('logo');
-            $table->string('licence')->nullable();
+            $table->string('licence');
             $table->string('web')->nullable();
             $table->string('twitter')->nullable();    
             $table->string('facebook')->nullable();    
