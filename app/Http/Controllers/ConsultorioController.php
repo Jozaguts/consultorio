@@ -85,18 +85,6 @@ class ConsultorioController extends Controller
             $consultorio = DB::table('consultorios')
                 ->where('id', $id)
                 ->update($request->all());
-            // $consultorio = Consultorio::find($id);
-            // $consultorio->name = $request->get('name');
-            // $consultorio->address = $request->get('address');
-            // $consultorio->phone = $request->get('phone');
-            // $consultorio->responsable = $request->get('responsable');
-            // $consultorio->logo = $request->get('logo');
-            // $consultorio->licence = $request->get('licence');
-            // $consultorio->web = $request->get('web');
-            // $consultorio->twitter = $request->get('twitter');
-            // $consultorio->facebook = $request->get('facebook');
-            // $consultorio->instagram = $request->get('instagram');
-            // $res = $consultorio->save();
             return response()->json(['success' => 'Consultorio modificado', 'data' => $consultorio], 200);
         } catch (\Throwable $th) {
             return response()->json(['error' => $th->getMessage()], 400);
