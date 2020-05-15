@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use GuzzleHttp\Client;
 use App\Consultorio;
 use App\Http\Requests\ConsultorioStoreRequest;
+use Illuminate\Support\Facades\DB;
 use Validator;
 
 class ConsultorioController extends Controller
@@ -31,10 +32,10 @@ class ConsultorioController extends Controller
         try {
             $input = $request->all();
             $consultorio = Consultorio::create($input);
-            return response()->json(['success'=> 'Consultorio creado'], 201);
+            return response()->json(['success' => 'Consultorio creado', 'data' => $consultorio], 201);
         } catch (\Throwable $th) {
             //throw $th;
-            return response()->json(['error' => $th->getMessage()],400 );
+            return response()->json(['error' => $th->getMessage()], 400);
         }
     }
 
@@ -46,8 +47,7 @@ class ConsultorioController extends Controller
      */
     public function show($id)
     {
-        $consultorio= Consultorio::find($id);
-        dd($consultorio);
+        $consultorio = Consultorio::findorfail($id)->first();
     }
 
 
@@ -60,13 +60,15 @@ class ConsultorioController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {                
+    {
+
+
         $validator = Validator::make($request->all(), [
-            'name'=> 'required|max:255',
-            'address' => 'required|max:255',
-            'phone' => 'required|min:10|max:10',
-            'responsable' => 'required|max:255',
-            'logo' => 'required',
+            'name' => 'string',
+            'address' => 'string',
+            'phone' => 'min:10|max:10',
+            'responsable' => 'string',
+            'logo' => 'string',
             'licence' => 'string|max:25',
             'web' => 'string|url',
             'twitter' => 'string',
@@ -77,29 +79,28 @@ class ConsultorioController extends Controller
         
 
         if ($validator->fails()) {
-            return response()->json(['error'=>$validator->errors()], 401);
+            return response()->json(['error' => $validator->errors()], 401);
         }
-
         try {
-            $consultorio = Consultorio::find($id);
-            $consultorio->name = $request->get('name');
-            $consultorio->address = $request->get('address');
-            $consultorio->phone = $request->get('phone');
-            $consultorio->responsable = $request->get('responsable');
-            $consultorio->logo = $request->get('logo');
-            $consultorio->licence = $request->get('licence');
-            $consultorio->web = $request->get('web');
-            $consultorio->twitter = $request->get('twitter');
-            $consultorio->facebook = $request->get('facebook');
-            $consultorio->instagram = $request->get('instagram');
-            $res =$consultorio->save();
-            return response()->json(['success'=>'Consultorio modificado'], 200);
+            $consultorio = DB::table('consultorios')
+                ->where('id', $id)
+                ->update($request->all());
+            // $consultorio = Consultorio::find($id);
+            // $consultorio->name = $request->get('name');
+            // $consultorio->address = $request->get('address');
+            // $consultorio->phone = $request->get('phone');
+            // $consultorio->responsable = $request->get('responsable');
+            // $consultorio->logo = $request->get('logo');
+            // $consultorio->licence = $request->get('licence');
+            // $consultorio->web = $request->get('web');
+            // $consultorio->twitter = $request->get('twitter');
+            // $consultorio->facebook = $request->get('facebook');
+            // $consultorio->instagram = $request->get('instagram');
+            // $res = $consultorio->save();
+            return response()->json(['success' => 'Consultorio modificado', 'data' => $consultorio], 200);
         } catch (\Throwable $th) {
-            return response()->json(['error'=> $th->getMessage()], $th->getCode());
+            return response()->json(['error' => $th->getMessage()], 400);
         }
-        
-
-        
     }
 
     /**
