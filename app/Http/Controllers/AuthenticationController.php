@@ -14,17 +14,19 @@ class AuthenticationController extends Controller
 {
     public function login(Request $request)
     {
-        // if ($request->isJson()) {
         
+        try {
             if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
                 $access_token = $this->getToken($request->email, $request->password);
-                return response()->json(['access_token'=>$access_token],200);                
+                return response()->json(['access_token' => $access_token], 200);
             } else {
-                dd('entro al else');
+                return response()->json(['error' => 'Correo electrónico y/o contraseña no coinciden con nuestros registros'], 400);
             }
-        // } else {
-        //     return response()->json(['error' => 'Forbidden'], 403);
-        // }
+        } catch (\Throwable $th) {
+            return response()->json(['errors' => $th->getMessage()], 400);
+            
+        }
+
     }
 
     public function register(Request $request)
@@ -55,7 +57,7 @@ class AuthenticationController extends Controller
     public function getToken($email, $password){
         $client = passportClient::where('password_client', 1)->first();        
         $http = new Client;
-        
+    
         $response = $http->post('http://localhost/consultorio/public/oauth/token', [
             'form_params' => [
                 'grant_type' => 'password',
@@ -66,8 +68,8 @@ class AuthenticationController extends Controller
                 'scope' => '',
             ],
         ]);        
-        $res = json_decode((string) $response->getBody(), true);
-        dd($res);
-        //return json_decode((string) $response->getBody(), true);
+        // $res = json_decode((string) $response->getBody(), true);
+        
+        return json_decode((string) $response->getBody(), true);
     }
 }
