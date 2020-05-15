@@ -24,10 +24,10 @@ class ConsultorioStoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'name'=> 'required|unique:consultorios',
-            'address' => 'required',
+            'name'=> 'required|unique:consultorios|max:255',
+            'address' => 'required|max:255',
             'phone' => 'required|min:10|max:10',
-            'responsable' => 'required',
+            'responsable' => 'required|max:255',
             'logo' => 'required',
             'licence' => 'string|max:25|unique:consultorios',
             'web' => 'string|url',
