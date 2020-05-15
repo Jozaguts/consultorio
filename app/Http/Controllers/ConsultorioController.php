@@ -46,7 +46,7 @@ class ConsultorioController extends Controller
      */
     public function show($id)
     {
-        $consultorio= Consultorio::findorfail($id)->first();
+        $consultorio= Consultorio::find($id);
         dd($consultorio);
     }
 
@@ -60,22 +60,23 @@ class ConsultorioController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {        
+    {                
         $validator = Validator::make($request->all(), [
-            'name'=> 'required',
-            'address' => 'required',
+            'name'=> 'required|max:255',
+            'address' => 'required|max:255',
             'phone' => 'required|min:10|max:10',
-            'responsable' => 'required',
+            'responsable' => 'required|max:255',
             'logo' => 'required',
             'licence' => 'string|max:25',
             'web' => 'string|url',
             'twitter' => 'string',
             'facebook' => 'string',
-            'instagram' => 'string',
+            'instagram' => 'string',            
         ]);
 
+        
+
         if ($validator->fails()) {
-            dd($validator);
             return response()->json(['error'=>$validator->errors()], 401);
         }
 
@@ -109,6 +110,11 @@ class ConsultorioController extends Controller
      */
     public function destroy($id)
     {
-        //
+        try {
+            $consultorio = Consultorio::find($id)->delete();
+            return response()->json(['success'=>'Consultorio borrado'],200);
+        } catch (\Throwable $th) {
+            return response()->json(['error'=> $th->getMessage()], $th->getCode());
+        }
     }
 }
