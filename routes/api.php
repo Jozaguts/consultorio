@@ -14,4 +14,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::post('/login', 'AuthenticationController@login');
+Route::post('login', 'AuthenticationController@login')->name('api-login');
+Route::post('register', 'AuthenticationController@register');
+
+Route::apiResource('consultorio', 'ConsultorioController')->middleware('auth:api');
