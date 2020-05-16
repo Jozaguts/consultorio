@@ -12,17 +12,7 @@ class ConsultorioSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('consultorios')->insert([
-            'name' => 'prueba',
-            'address' => 'direccion',
-            'phone' => '33333333',
-            'responsable' => 'Dr. José Sagit',
-            'logo' => 'http://google.com',
-            'licence' => '123qwer',
-            'web' => null ,
-            'twitter' =>null  ,
-            'facebook' => null ,
-            'instagram' => null ,
-        ]);
+        
+        factory(App\Consultorio::class, 20)->create();
     }
 }
