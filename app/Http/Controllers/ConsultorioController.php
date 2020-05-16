@@ -29,6 +29,9 @@ class ConsultorioController extends Controller
      */
     public function store(ConsultorioStoreRequest $request)
     {
+        if($request->isJson()){
+            
+        }
         try {
             $input = $request->all();
             $consultorio = Consultorio::create($input);
@@ -61,8 +64,6 @@ class ConsultorioController extends Controller
      */
     public function update(Request $request, $id)
     {
-
-
         $validator = Validator::make($request->all(), [
             'name' => 'string',
             'address' => 'string',

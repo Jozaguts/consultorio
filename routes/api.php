@@ -18,3 +18,4 @@ Route::post('login', 'AuthenticationController@login')->name('api-login');
 Route::post('register', 'AuthenticationController@register');
 
 Route::apiResource('consultorio', 'ConsultorioController')->middleware('auth:api');
+Route::apiResource('especialidad', 'EspecialidadController')->middleware('auth:api');
