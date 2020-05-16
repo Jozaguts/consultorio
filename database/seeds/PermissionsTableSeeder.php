@@ -15,31 +15,37 @@ class PermissionsTableSeeder extends Seeder
     public function run()
     {
         //Permission list
-        Permission::create(['name' => 'consultorios.index']);
-        Permission::create(['name' => 'consultorios.edit']);
-        Permission::create(['name' => 'consultorios.show']);
-        Permission::create(['name' => 'consultorios.create']);
-        Permission::create(['name' => 'consultorios.destroy']);
+
+        //Permisos para modelo consulting_rooms
+        Permission::create(['name' => 'consulting_rooms.index']);
+        Permission::create(['name' => 'consulting_rooms.edit']);
+        Permission::create(['name' => 'consulting_rooms.show']);
+        Permission::create(['name' => 'consulting_rooms.create']);
+        Permission::create(['name' => 'consulting_rooms.destroy']);
+
+        //Permisos para modelo usuarios
+
+        Permission::create(['name' => 'users.']);
 
         //Admin
         $admin = Role::create(['name' => 'Admin']);
 
         $admin->givePermissionTo([
-            'consultorios.index',
-            'consultorios.edit',
-            'consultorios.show',
-            'consultorios.create',
-            'consultorios.destroy'
+            'consulting_rooms.index',
+            'consulting_rooms.edit',
+            'consulting_rooms.show',
+            'consulting_rooms.create',
+            'consulting_rooms.destroy'
         ]);
-        //$admin->givePermissionTo('consultorios.index');
+        //$admin->givePermissionTo('consulting_rooms.index');
         //$admin->givePermissionTo(Permission::all());
 
         //Guest
         $guest = Role::create(['name' => 'Guest']);
 
         $guest->givePermissionTo([
-            'consultorios.index',
-            'consultorios.show'
+            'consulting_rooms.index',
+            'consulting_rooms.show'
         ]);
 
         //User Admin

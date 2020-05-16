@@ -17,8 +17,8 @@ class CreateEspecialidadesTable extends Migration
             $table->id();
             $table->string('name');
 
-            $table->unsignedBigInteger('consultorio_id');
-            $table->foreign('consultorio_id')->references('id')->on('consultorios');            
+            $table->unsignedBigInteger('consulting_room_id');
+            $table->foreign('consulting_room_id')->references('id')->on('consulting_rooms');            
             $table->softDeletes();   
             $table->timestamps();
         });

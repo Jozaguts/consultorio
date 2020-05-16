@@ -3,7 +3,7 @@
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
 use App\User;
-use App\Consultorio;
+use App\ConsultingRoom;
 
 use Faker\Generator as Faker;
 use Illuminate\Support\Str;
@@ -25,13 +25,13 @@ $factory->define(User::class, function (Faker $faker) {
         'last_name' => $faker->lastName,
         'email' => $faker->unique()->safeEmail,
         'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
-        'consultorio_id' => 1,
+        'consulting_room_id' => 1,
     ];
 });
 
-$factory->define(App\Consultorio::class, function (Faker $faker) {
+$factory->define(ConsultingRoom::class, function (Faker $faker) {
     return [
-        'name'             => $faker->name,
+        'name' => $faker->name,
         'address' => $faker->address,
         'phone' => $faker->phoneNumber,
         'responsable' => $faker->name,

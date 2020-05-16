@@ -3,7 +3,7 @@
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
-class ConsultorioSeeder extends Seeder
+class ConsultingRoomSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -13,6 +13,6 @@ class ConsultorioSeeder extends Seeder
     public function run()
     {
         
-        factory(App\Consultorio::class, 20)->create();
+        factory(App\ConsultingRoom::class, 20)->create();
     }
 }

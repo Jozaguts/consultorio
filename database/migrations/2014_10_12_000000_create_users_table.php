@@ -18,8 +18,8 @@ class CreateUsersTable extends Migration
             $table->string('name');
             $table->string('last_name');
             $table->string('email')->unique();
-            $table->unsignedBigInteger('consultorio_id');
-            $table->foreign('consultorio_id')->references('id')->on('consultorios');
+            $table->unsignedBigInteger('consulting_room_id');
+            $table->foreign('consulting_room_id')->references('id')->on('consulting_rooms');
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
