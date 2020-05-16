@@ -16,6 +16,11 @@ class ConsultorioController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function __construct() 
+    {
+        $this->middleware(['role:Admin']);
+    }
+
     public function index()
     {
         //
@@ -29,9 +34,7 @@ class ConsultorioController extends Controller
      */
     public function store(ConsultorioStoreRequest $request)
     {
-        if($request->isJson()){
-            
-        }
+        
         try {
             $input = $request->all();
             $consultorio = Consultorio::create($input);
