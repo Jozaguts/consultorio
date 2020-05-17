@@ -19,6 +19,9 @@ Route::post('register', 'AuthenticationController@register');
 
 Route::apiResource('consultorio', 'ConsultorioController')->middleware('auth:api');
 Route::apiResource('especialidad', 'EspecialidadController')->middleware('auth:api');
+
+Route::apiResource('users','UserController')->middleware('auth:api');
+
 // Route::middleware(['auth:api'])->group(function () {
 
 //     Route::post('consultorio/store', 'ProductController@store')->name('consultorio.store')
