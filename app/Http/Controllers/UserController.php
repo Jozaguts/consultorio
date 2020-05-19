@@ -45,9 +45,10 @@ class UserController extends Controller
      */
     public function store(UserStoreRequest $request)
     {
+
         try {
             $user = User::create([
-                'first_name' => $request->name,
+                'first_name' => $request->first_name,
                 'last_name' => $request->last_name,
                 'email' => $request->email,
                 'consulting_room_id' => $request->consulting_room_id,
@@ -118,7 +119,7 @@ class UserController extends Controller
         try {
             $user = User::find($id);
             $user->delete();
-            return response()->json(['success' => "Usuario {$user->name} ha sido eliminado"], 200);
+            return response()->json(['success' => "Usuario {$user->first_name} ha sido eliminado"], 200);
         } catch (\Throwable $th) {
            return response()->json(['errors' => $th->getMessage()]);
         }
