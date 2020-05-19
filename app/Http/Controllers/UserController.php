@@ -5,8 +5,8 @@ namespace App\Http\Controllers;
 use App\User;
 use Illuminate\Http\Request;
 use App\Http\Requests\UserStoreRequest;
+use App\Http\Requests\UserUpdateRequest;
 use Illuminate\Support\Arr;
-use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
@@ -47,7 +47,7 @@ class UserController extends Controller
     {
         try {
             $user = User::create([
-                'name' => $request->name,
+                'first_name' => $request->name,
                 'last_name' => $request->last_name,
                 'email' => $request->email,
                 'consulting_room_id' => $request->consulting_room_id,
@@ -93,7 +93,7 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UserUpdateRequest $request, $id)
     {
         try {
             $user = User::find($id);
