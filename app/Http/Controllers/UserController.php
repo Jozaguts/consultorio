@@ -5,16 +5,11 @@ namespace App\Http\Controllers;
 use App\User;
 use Illuminate\Http\Request;
 use App\Http\Requests\UserStoreRequest;
+use App\Http\Requests\UserUpdateRequest;
 use Illuminate\Support\Arr;
-use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
-
-    public function __construct()
-    {
-        $this->middleware(['role_or_permission:Admin|users index|users show']);
-    }
 
     /**
      * Display a listing of the resource.
@@ -24,7 +19,6 @@ class UserController extends Controller
     public function index()
     {
         $users = User::all();
-
         return response()->json(['users', $users]);
     }
 
@@ -33,7 +27,7 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(UserStoreRequest $request)
+    public function create(Request $request)
     {
     }
 
@@ -45,9 +39,10 @@ class UserController extends Controller
      */
     public function store(UserStoreRequest $request)
     {
+
         try {
             $user = User::create([
-                'name' => $request->name,
+                'first_name' => $request->first_name,
                 'last_name' => $request->last_name,
                 'email' => $request->email,
                 'consulting_room_id' => $request->consulting_room_id,
@@ -93,7 +88,7 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UserUpdateRequest $request, $id)
     {
         try {
             $user = User::find($id);
@@ -118,9 +113,9 @@ class UserController extends Controller
         try {
             $user = User::find($id);
             $user->delete();
-            return response()->json(['success' => "Usuario {$user->name} ha sido eliminado"], 200);
+            return response()->json(['success' => "Usuario {$user->first_name} ha sido eliminado"], 200);
         } catch (\Throwable $th) {
-           return response()->json(['errors' => $th->getMessage()]);
+            return response()->json(['errors' => $th->getMessage()]);
         }
     }
 }

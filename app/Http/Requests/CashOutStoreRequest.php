@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UserStoreRequest extends FormRequest
+class CashOutStoreRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,12 +24,11 @@ class UserStoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'first_name' => 'required',
-            'last_name' => 'required',
-            'email' => 'required|unique:users',
-            'password' => 'required',
-            'password_confirmation' => 'required|same:password',
-            'consulting_room_id' => 'required',
+            'user_id' => 'numeric|required', 
+            'date' => 'required|date_format:Y-m-d H:i:s', 
+            'amount' => 'required|numeric', 
+            'cash_out_date' => 'required|date_format:Y-m-d H:i:s', 
+            'consulting_room_id' => 'required|numeric|'
         ];
     }
 }

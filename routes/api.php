@@ -17,28 +17,33 @@ use Illuminate\Support\Facades\Route;
 Route::post('login', 'AuthenticationController@login')->name('api-login');
 Route::post('register', 'AuthenticationController@register');
 
-Route::apiResource('consultorio', 'ConsultorioController')->middleware('auth:api');
 Route::apiResource('especialidades', 'EspecialidadController')->middleware('auth:api');
 Route::apiResource('doctor', 'DoctorController')->middleware('auth:api');
 Route::apiResource('horarios','ScheduleController')->middleware('auth:api');
+Route::apiResource('especialidad', 'EspecialidadController')->middleware('auth:api');
 
-Route::apiResource('users','UserController')->middleware('auth:api');
+/* 
+******************************** FALTAN LAS RUTAS DE ELIMINAR
+*/
 
+Route::group(['middleware' => ['auth:api', 'role_or_permission:Admin|index consulting_room|show consulting_room']], function () {
+        Route::post('consultorios', 'ConsultorioController@store')->middleware('permission:create consulting_room');
+        Route::put('consultorios/{id}', 'ConsultorioController@update')->middleware('permission:edit consulting_room');
+        Route::get('consultorios', 'ConsultorioController@index');
+        Route::get('consultorios/{id}', 'ConsultorioController@show');
+});
 
-// Route::middleware(['auth:api'])->group(function () {
+Route::group(['middleware' => ['auth:api', 'role_or_permission:Admin|index user|show user']], function () {
+        Route::post('usuarios', 'UserController@store')->middleware('permission:create user');
+        Route::put('usuarios/{id}', 'UserController@update')->middleware('permission:edit user');
+        Route::get('usuarios', 'UserController@index');
+        Route::get('usuarios/{id}', 'UserController@show');
+});
 
-//     Route::post('consultorio/store', 'ProductController@store')->name('consultorio.store')
-//         ->middleware('permission:consultorio.create');
-//     Route::get('consultorio', 'ProductController@index')->name('consultorio.index')
-//         ->middleware('permission:consultorio.index');
-//     Route::get('consultorio/create', 'ProductController@create')->name('consultorio.create')
-//         ->middleware('permission:consultorio.create');
-//     Route::put('consultorio/{role}', 'ProductController@update')->name('consultorio.update')
-//         ->middleware('permission:consultorio.edit');
-//     Route::get('consultorio/{role}', 'ProductController@show')->name('consultorio.show')
-//         ->middleware('permission:consultorio.show');
-//     Route::delete('consultorio/{role}', 'ProductController@destroy')->name('consultorio.destroy')
-//         ->middleware('permission:consultorio.destroy');
-//     Route::get('consultorio/{role}/edit', 'ProductController@edit')->name('consultorio.edit')
-//         ->middleware('permission:consultorio.edit');
-// });
+Route::group(['middleware' => ['auth:api', 'role_or_permission:Admin|index cash_out|show cash_out']], function () {
+        Route::post('cortes', 'CashOutController@store')->middleware('permission:create cash_out');
+        Route::put('cortes/{id}', 'CashOutController@update')->middleware('permission:create cash_out');
+        Route::delete('cortes/{id}', 'CashOutController@destroy')->middleware('permission:destroy cash_out');
+        Route::get('cortes', 'CashOutController@index');
+        Route::get('cortes/{id}', 'CashOutController@show');
+});

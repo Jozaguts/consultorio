@@ -14,7 +14,7 @@ class UserSeeder extends Seeder
     {
        
         App\User::create([
-            'name' => 'User Test',
+            'first_name' => 'User Test',
             'last_name' => 'Apellido test',
             'email' => 'test@test.com',
             'consulting_room_id' => 1,
