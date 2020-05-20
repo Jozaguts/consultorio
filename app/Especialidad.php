@@ -7,11 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 class Especialidad extends Model
 {
     use SoftDeletes;
-    protected $table = 'especialidades';
+    protected $table = 'specialties';
     protected $dates = ['deleted_at'];
 
     protected $fillable = [
-        'name', 'consultorio_id'
+        'name', 'consulting_room_id'
     ];
 
 }

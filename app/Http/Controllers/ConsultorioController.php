@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use GuzzleHttp\Client;
-use App\Consultorio;
+use App\ConsultingRoom;
 use App\Http\Requests\ConsultorioStoreRequest;
 use Illuminate\Support\Facades\DB;
 use Validator;
@@ -18,7 +18,14 @@ class ConsultorioController extends Controller
      */
     public function index()
     {
-        //
+        try {
+            $consultorios = ConsultingRoom::all();
+            return response()->json(['success'=>'ok', 'data'=> $consultorios], 200);
+        } catch (\Throwable $th) {
+            return response()->json(['error'=> $th->getMessage()],200);
+        }
+        
+    
     }
 
     /**
@@ -32,7 +39,7 @@ class ConsultorioController extends Controller
         
         try {
             $input = $request->all();
-            $consultorio = Consultorio::create($input);
+            $consultorio = ConsultingRoom::create($input);
             return response()->json(['success' => 'Consultorio creado', 'data' => $consultorio], 201);
         } catch (\Throwable $th) {
             //throw $th;
@@ -48,7 +55,13 @@ class ConsultorioController extends Controller
      */
     public function show($id)
     {
-        $consultorio = Consultorio::findorfail($id)->first();
+        try {
+            $consultorio = ConsultingRoom::findorfail($id)->first();
+            return response()->json(['success'=>'ok', 'data'=>$consultorio], 200);
+        } catch (\Throwable $th) {
+            return response()->json(['success'=>'ok', 'data'=>$consultorio], 200);
+        }
+        
     }
 
 
@@ -99,7 +112,7 @@ class ConsultorioController extends Controller
     public function destroy($id)
     {
         try {
-            $consultorio = Consultorio::find($id)->delete();
+            $consultorio = ConsultingRoom::find($id)->delete();
             return response()->json(['success'=>'Consultorio borrado'],200);
         } catch (\Throwable $th) {
             return response()->json(['error'=> $th->getMessage()], $th->getCode());

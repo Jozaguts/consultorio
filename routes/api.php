@@ -16,6 +16,10 @@ use Illuminate\Support\Facades\Route;
 
 Route::post('login', 'AuthenticationController@login')->name('api-login');
 Route::post('register', 'AuthenticationController@register');
+
+Route::apiResource('especialidades', 'EspecialidadController')->middleware('auth:api');
+Route::apiResource('doctor', 'DoctorController')->middleware('auth:api');
+Route::apiResource('horarios','ScheduleController')->middleware('auth:api');
 Route::apiResource('especialidad', 'EspecialidadController')->middleware('auth:api');
 
 /* 
