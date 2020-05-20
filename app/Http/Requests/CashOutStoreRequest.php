@@ -13,7 +13,7 @@ class CashOutStoreRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,11 @@ class CashOutStoreRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'user_id' => 'numeric', 
+            'date' => 'date_format:d-m-Y H:i:s', 
+            'amount' => 'numeric', 
+            'cash_out_date' => 'date_format:d-m-Y H:i:s', 
+            'consulting_room_id' => 'numeric'
         ];
     }
 }
