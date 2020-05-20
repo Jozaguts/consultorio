@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\CashOut;
 use App\Http\Requests\CashOutStoreRequest;
 use Illuminate\Http\Request;
 
@@ -14,7 +15,12 @@ class CashOutController extends Controller
      */
     public function index()
     {
-        //
+        try {
+            $cash_outs = CashOut::all();
+            return response()->json(['cash_outs' => $cash_outs]);
+        } catch (\Throwable $th) {
+            return response()->json(['errors' => $th->getMessage()]);
+        }
     }
 
     /**

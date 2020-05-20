@@ -20,16 +20,23 @@ Route::apiResource('especialidad', 'EspecialidadController')->middleware('auth:a
 
 
 
-Route::group(['middleware' => ['auth:api', 'role_or_permission:Admin|edit consulting_room|create consulting_room']], function () {
-        Route::post('consultorios', 'ConsultorioController@store');
-        Route::put('consultorios/{id}', 'ConsultorioController@update');
+Route::group(['middleware' => ['auth:api', 'role_or_permission:Admin|index consulting_room|show consulting_room']], function () {
+        Route::post('consultorios', 'ConsultorioController@store')->middleware('permission:create consulting_room');
+        Route::put('consultorios/{id}', 'ConsultorioController@update')->middleware('permission:edit consulting_room');
+        Route::get('consultorios', 'ConsultorioController@index');
+        Route::get('consultorios/{id}', 'ConsultorioController@show');
 });
 
-Route::group(['middleware' => ['auth:api', 'role_or_permission:Admin|edit user|create user']], function () {
-        Route::post('usuarios', 'UserController@store');
-        Route::put('usuarios/{id}', 'UserController@update');
+Route::group(['middleware' => ['auth:api', 'role_or_permission:Admin|index user|show user']], function () {
+        Route::post('usuarios', 'UserController@store')->middleware('permission:create user');
+        Route::put('usuarios/{id}', 'UserController@update')->middleware('permission:edit user');
+        Route::get('usuarios', 'UserController@index');
+        Route::get('usuarios/{id}', 'UserController@show');
 });
 
-Route::group(['middleware' => ['auth:api', 'role_or_permission:Admin|edit cash_out|create cash_out']], function () {
-        Route::post('cortes', 'CashOutController@store');
+Route::group(['middleware' => ['auth:api', 'role_or_permission:Admin|index cash_out|show cash_out']], function () {
+        Route::post('cortes', 'CashOutController@store')->middleware('permission:create cash_out');
+        Route::put('cortes/{id}', 'CashOutController@update')->middleware('permission:create cash_out');
+        Route::get('cortes', 'CashOutController@index');
+        Route::get('cortes/{id}', 'CashOutController@show');
 });
