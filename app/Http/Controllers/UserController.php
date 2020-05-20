@@ -11,11 +11,6 @@ use Illuminate\Support\Arr;
 class UserController extends Controller
 {
 
-    public function __construct()
-    {
-        $this->middleware(['role_or_permission:Admin|users index|users show']);
-    }
-
     /**
      * Display a listing of the resource.
      *
@@ -24,7 +19,6 @@ class UserController extends Controller
     public function index()
     {
         $users = User::all();
-
         return response()->json(['users', $users]);
     }
 
@@ -33,7 +27,7 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(UserStoreRequest $request)
+    public function create(Request $request)
     {
     }
 
@@ -121,7 +115,7 @@ class UserController extends Controller
             $user->delete();
             return response()->json(['success' => "Usuario {$user->first_name} ha sido eliminado"], 200);
         } catch (\Throwable $th) {
-           return response()->json(['errors' => $th->getMessage()]);
+            return response()->json(['errors' => $th->getMessage()]);
         }
     }
 }

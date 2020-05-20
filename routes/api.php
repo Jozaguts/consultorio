@@ -20,22 +20,12 @@ Route::post('register', 'AuthenticationController@register');
 Route::apiResource('consultorio', 'ConsultorioController')->middleware('auth:api');
 Route::apiResource('especialidad', 'EspecialidadController')->middleware('auth:api');
 
-Route::apiResource('users','UserController')->middleware('auth:api');
+// Route::apiResource('users','UserController')->middleware('auth:api');
 
-// Route::middleware(['auth:api'])->group(function () {
+Route::group(['middleware' => ['auth:api', 'role_or_permission:Admin|users edit|users create']], function () {
 
-//     Route::post('consultorio/store', 'ProductController@store')->name('consultorio.store')
-//         ->middleware('permission:consultorio.create');
-//     Route::get('consultorio', 'ProductController@index')->name('consultorio.index')
-//         ->middleware('permission:consultorio.index');
-//     Route::get('consultorio/create', 'ProductController@create')->name('consultorio.create')
-//         ->middleware('permission:consultorio.create');
-//     Route::put('consultorio/{role}', 'ProductController@update')->name('consultorio.update')
-//         ->middleware('permission:consultorio.edit');
-//     Route::get('consultorio/{role}', 'ProductController@show')->name('consultorio.show')
-//         ->middleware('permission:consultorio.show');
-//     Route::delete('consultorio/{role}', 'ProductController@destroy')->name('consultorio.destroy')
-//         ->middleware('permission:consultorio.destroy');
-//     Route::get('consultorio/{role}/edit', 'ProductController@edit')->name('consultorio.edit')
-//         ->middleware('permission:consultorio.edit');
-// });
+        Route::post('usuarios', 'UserController@store');
+        Route::put('usuarios/{id}', 'UserController@update');
+
+});
+
