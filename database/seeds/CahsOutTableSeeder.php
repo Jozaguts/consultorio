@@ -11,6 +11,6 @@ class CahsOutTableSeeder extends Seeder
      */
     public function run()
     {
-        //
+        factory(App\CashOut::class, 10)->create();
     }
 }
