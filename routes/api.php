@@ -29,6 +29,7 @@ Route::apiResource('especialidad', 'EspecialidadController')->middleware('auth:a
 Route::group(['middleware' => ['auth:api', 'role_or_permission:Admin|index consulting_room|show consulting_room']], function () {
         Route::post('consultorios', 'ConsultorioController@store')->middleware('permission:create consulting_room');
         Route::put('consultorios/{id}', 'ConsultorioController@update')->middleware('permission:edit consulting_room');
+        Route::delete('consultorios/{id}', 'ConsultorioController@destroy')->middleware('permission:destroy consulting_room');
         Route::get('consultorios', 'ConsultorioController@index');
         Route::get('consultorios/{id}', 'ConsultorioController@show');
 });
