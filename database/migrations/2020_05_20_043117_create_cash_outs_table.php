@@ -15,12 +15,12 @@ class CreateCashOutsTable extends Migration
     {
         Schema::create('cash_outs', function (Blueprint $table) {
             $table->id();
-            $table->bigIncrements('user_id');
+            $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
             $table->date('date');
             $table->decimal('amount', 8, 2);
             $table->date('cash_out_date');
-            $table->bigIncrements('consulting_room_id');
+            $table->unsignedBigInteger('consulting_room_id');
             $table->foreign('consulting_room_id')->references('id')->on('consulting_rooms');
             $table->timestamps();
         });
