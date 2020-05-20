@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CashOutStoreRequest;
 use Illuminate\Http\Request;
 
 class CashOutController extends Controller
@@ -32,9 +33,9 @@ class CashOutController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CashOutStoreRequest $request)
     {
-        //
+        dd('llego');
     }
 
     /**

@@ -16,16 +16,20 @@ use Illuminate\Support\Facades\Route;
 
 Route::post('login', 'AuthenticationController@login')->name('api-login');
 Route::post('register', 'AuthenticationController@register');
-
-Route::apiResource('consultorio', 'ConsultorioController')->middleware('auth:api');
 Route::apiResource('especialidad', 'EspecialidadController')->middleware('auth:api');
 
-// Route::apiResource('users','UserController')->middleware('auth:api');
 
-Route::group(['middleware' => ['auth:api', 'role_or_permission:Admin|users edit|users create']], function () {
 
-        Route::post('usuarios', 'UserController@store');
-        Route::put('usuarios/{id}', 'UserController@update');
-
+Route::group(['middleware' => ['auth:api', 'role_or_permission:Admin|edit consulting_room|create consulting_room']], function () {
+        Route::post('consultorios', 'ConsultorioController@store');
+        Route::put('consultorios/{id}', 'ConsultorioController@update');
 });
 
+Route::group(['middleware' => ['auth:api', 'role_or_permission:Admin|edit user|create user']], function () {
+        Route::post('usuarios', 'UserController@store');
+        Route::put('usuarios/{id}', 'UserController@update');
+});
+
+Route::group(['middleware' => ['auth:api', 'role_or_permission:Admin|edit cash_out|create cash_out']], function () {
+        Route::post('cortes', 'CashOutController@store');
+});

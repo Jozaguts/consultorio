@@ -24,11 +24,11 @@ class CashOutStoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'user_id' => 'numeric', 
-            'date' => 'date_format:d-m-Y H:i:s', 
-            'amount' => 'numeric', 
-            'cash_out_date' => 'date_format:d-m-Y H:i:s', 
-            'consulting_room_id' => 'numeric'
+            'user_id' => 'numeric|required', 
+            'date' => 'required|date_format:d-m-Y H:i:s', 
+            'amount' => 'required|numeric', 
+            'cash_out_date' => 'required|date_format:d-m-Y H:i:s', 
+            'consulting_room_id' => 'required|numeric|'
         ];
     }
 }
