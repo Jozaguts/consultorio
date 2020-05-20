@@ -18,9 +18,12 @@ Route::post('login', 'AuthenticationController@login')->name('api-login');
 Route::post('register', 'AuthenticationController@register');
 
 Route::apiResource('consultorio', 'ConsultorioController')->middleware('auth:api');
-Route::apiResource('especialidad', 'EspecialidadController')->middleware('auth:api');
+Route::apiResource('especialidades', 'EspecialidadController')->middleware('auth:api');
+Route::apiResource('doctor', 'DoctorController')->middleware('auth:api');
+Route::apiResource('horarios','ScheduleController')->middleware('auth:api');
 
 Route::apiResource('users','UserController')->middleware('auth:api');
+
 
 // Route::middleware(['auth:api'])->group(function () {
 

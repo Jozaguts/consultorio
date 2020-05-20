@@ -9,6 +9,12 @@ use Illuminate\Support\Facades\DB;
 
 class EspecialidadController extends Controller
 {
+
+    public function __construct() 
+    {
+        $this->middleware(['role:Admin']);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -29,10 +35,9 @@ class EspecialidadController extends Controller
      */
     public function store(Request $request)
     {            
-        
         $validator = Validator::make($request->all(), [
-            'name' => 'required|unique:especialidades|max:255',
-            'consultorio_id' => 'integer|required'
+            'name' => 'required|unique:specialties|max:255',
+            'consulting_room_id' => 'integer|required'
         ]);
 
         if ($validator->fails()) {
@@ -72,7 +77,7 @@ class EspecialidadController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'name' => 'required',
-            'consultorio_id' => 'integer|required'
+            'consulting_room_id' => 'integer|required'
         ]);
 
         if ($validator->fails()) {
@@ -80,7 +85,7 @@ class EspecialidadController extends Controller
         }
 
         try {
-            $especialidad = DB::table('especialidades')
+            $especialidad = DB::table('specialties')
                 ->where('id', $id)
                 ->update($request->all());
                 return response()->json(['success'=> 'Especialidad editada', 'data'=> $especialidad], 200);
