@@ -18,7 +18,9 @@ Route::post('login', 'AuthenticationController@login')->name('api-login');
 Route::post('register', 'AuthenticationController@register');
 Route::apiResource('especialidad', 'EspecialidadController')->middleware('auth:api');
 
-
+/* 
+******************************** FALTAN LAS RUTAS DE ELIMINAR
+*/
 
 Route::group(['middleware' => ['auth:api', 'role_or_permission:Admin|index consulting_room|show consulting_room']], function () {
         Route::post('consultorios', 'ConsultorioController@store')->middleware('permission:create consulting_room');
@@ -37,6 +39,7 @@ Route::group(['middleware' => ['auth:api', 'role_or_permission:Admin|index user|
 Route::group(['middleware' => ['auth:api', 'role_or_permission:Admin|index cash_out|show cash_out']], function () {
         Route::post('cortes', 'CashOutController@store')->middleware('permission:create cash_out');
         Route::put('cortes/{id}', 'CashOutController@update')->middleware('permission:create cash_out');
+        Route::delete('cortes/{id}', 'CashOutController@destroy')->middleware('permission:destroy cash_out');
         Route::get('cortes', 'CashOutController@index');
         Route::get('cortes/{id}', 'CashOutController@show');
 });

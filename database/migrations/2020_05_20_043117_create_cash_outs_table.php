@@ -22,6 +22,7 @@ class CreateCashOutsTable extends Migration
             $table->date('cash_out_date');
             $table->unsignedBigInteger('consulting_room_id');
             $table->foreign('consulting_room_id')->references('id')->on('consulting_rooms');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

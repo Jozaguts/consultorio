@@ -25,9 +25,9 @@ class CashOutStoreRequest extends FormRequest
     {
         return [
             'user_id' => 'numeric|required', 
-            'date' => 'required|date_format:d-m-Y H:i:s', 
+            'date' => 'required|date_format:Y-m-d H:i:s', 
             'amount' => 'required|numeric', 
-            'cash_out_date' => 'required|date_format:d-m-Y H:i:s', 
+            'cash_out_date' => 'required|date_format:Y-m-d H:i:s', 
             'consulting_room_id' => 'required|numeric|'
         ];
     }

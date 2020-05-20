@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\CashOut;
 use App\Http\Requests\CashOutStoreRequest;
+use App\Http\Requests\CashOutUpdateRequest;
 use Illuminate\Http\Request;
 
 class CashOutController extends Controller
@@ -41,7 +42,12 @@ class CashOutController extends Controller
      */
     public function store(CashOutStoreRequest $request)
     {
-        dd('llego');
+        try {
+            $cash_out = CashOut::create($request->all());
+            return response()->json(['success' => 'Corte registrado', 'corte' => $cash_out], 201);
+        } catch (\Throwable $th) {
+            return response()->json(['errors' => $th->getMessage()]);
+        }
     }
 
     /**
@@ -52,7 +58,12 @@ class CashOutController extends Controller
      */
     public function show($id)
     {
-        //
+        try {
+            $cash_out =  CashOut::find($id);
+            return response()->json(['cash_out' => $cash_out], 200);
+        } catch (\Throwable $th) {
+            return response()->json(['errors' => $th->getMessage()]);
+        }
     }
 
     /**
@@ -73,9 +84,15 @@ class CashOutController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(CashOutUpdateRequest $request, $id)
     {
-        //
+        try {
+            $cash_out = CashOut::find($id);
+            $cash_out->update($request->all());
+            return response()->json(['success' => 'Corte de caja actualizado','cash_out' => $cash_out],200);
+        } catch (\Throwable $th) {
+            return response()->json(['errors' => $th->getMessage()]);
+        }
     }
 
     /**
@@ -86,6 +103,12 @@ class CashOutController extends Controller
      */
     public function destroy($id)
     {
-        //
+        try {
+         $cash_out =  CashOut::find($id);
+         $cash_out->delete();
+            return response()->json(['success'=> "Corte de caja {$cash_out->id} ha sido elimino"]);
+        } catch (\Throwable $th) {
+            return response()->json(['errors' => $th->getMessage()]);
+        }
     }
 }
