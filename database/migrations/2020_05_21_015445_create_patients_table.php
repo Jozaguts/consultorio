@@ -17,9 +17,9 @@ class CreatePatientsTable extends Migration
             $table->id();
             $table->string('first_name');
             $table->string('last_name');
-            $$table->string('second_last_name');
+            $table->string('second_last_name');
             $table->decimal('age',3,2);
-            $table->decimal('height',1,2);
+            $table->decimal('height',3,2);
             $table->string('address');
             $table->string('phone');
             $table->string('contact');

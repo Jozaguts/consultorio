@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class SpecialtySeeder extends Seeder
+class PatientsTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -11,6 +11,6 @@ class SpecialtySeeder extends Seeder
      */
     public function run()
     {
-        factory(App\Especialidad::class, 10)->create();
+        factory(App\Patient::class, 10)->create();
     }
 }

@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use GuzzleHttp\Client;
 use App\ConsultingRoom;
 use App\Http\Requests\ConsultorioStoreRequest;
 use Illuminate\Support\Facades\DB;
@@ -24,8 +23,6 @@ class ConsultorioController extends Controller
         } catch (\Throwable $th) {
             return response()->json(['error'=> $th->getMessage()],200);
         }
-        
-    
     }
 
     /**
@@ -42,7 +39,6 @@ class ConsultorioController extends Controller
             $consultorio = ConsultingRoom::create($input);
             return response()->json(['success' => 'Consultorio creado', 'data' => $consultorio], 201);
         } catch (\Throwable $th) {
-            //throw $th;
             return response()->json(['error' => $th->getMessage()], 400);
         }
     }
@@ -88,13 +84,11 @@ class ConsultorioController extends Controller
             'instagram' => 'string',            
         ]);
 
-        
-
         if ($validator->fails()) {
             return response()->json(['error' => $validator->errors()], 401);
         }
         try {
-            $consultorio = DB::table('consultorios')
+            $consultorio = DB::table('consulting_rooms')
                 ->where('id', $id)
                 ->update($request->all());
             return response()->json(['success' => 'Consultorio modificado', 'data' => $consultorio], 200);
@@ -113,7 +107,7 @@ class ConsultorioController extends Controller
     {
         try {
             $consultorio = ConsultingRoom::find($id)->delete();
-            return response()->json(['success'=>'Consultorio borrado'],200);
+            return response()->json(['success'=>"El consultorio {$consultorio->name} ha sido borrado"], 200);
         } catch (\Throwable $th) {
             return response()->json(['error'=> $th->getMessage()], $th->getCode());
         }

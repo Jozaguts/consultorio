@@ -20,8 +20,8 @@ class CreateDoctorsTable extends Migration
             $table->foreign('user_id')->references('id')->on('users');
             $table->unsignedBigInteger('consulting_room_id');
             $table->foreign('consulting_room_id')->references('id')->on('consulting_rooms');            
-            $table->unsignedBigInteger('specialtie_id');
-            $table->foreign('specialtie_id')->references('id')->on('specialties');   
+            $table->unsignedBigInteger('specialty_id');
+            $table->foreign('specialty_id')->references('id')->on('specialties');   
 
             $table->string('phone');
             $table->string('mobile_phone');
