@@ -58,7 +58,7 @@ class PaymentMethodsController extends Controller
     public function show($id)
     {
         try {
-            $payment_method = Payment::find($id);
+            $payment_method = PaymentMethod::find($id);
             return response()->json(['payment_method' => $payment_method],200);
         } catch (\Throwable $th) {
             return response()->json(['errors' => $th->getMessage()],400);

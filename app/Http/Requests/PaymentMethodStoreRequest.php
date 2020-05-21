@@ -25,7 +25,7 @@ class PaymentMethodStoreRequest extends FormRequest
     {
         return [
             'name' => 'required',
-            'consulting_room_id' => 'required|exists:consulting_rooms'
+            'consulting_room_id' => 'required'
         ];
     }
 }
