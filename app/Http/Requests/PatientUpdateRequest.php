@@ -13,7 +13,7 @@ class PatientUpdateRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,16 @@ class PatientUpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'first_name' => 'string|min:4',
+            'last_name' => ' string',
+            'second_last_name' => 'string ',
+            'age' => 'min:1',
+            'height' => ' min:1',
+            'address' => 'string',
+            'phone' => 'min:10',
+            'contact' => 'string',
+            'contact_phone' => 'min:10',
+            'consulting_room_id' => 'required'
         ];
     }
 }
