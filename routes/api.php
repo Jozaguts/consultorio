@@ -57,3 +57,11 @@ Route::group(['middleware' => ['auth:api', 'role_or_permission:Admin|index patie
     Route::get('pacientes', 'PatientsController@index');
     Route::get('pacientes/{id}', 'PatientsController@show');
 });
+Route::group(['middleware' => ['auth:api', 'role_or_permission:Admin|index payment_method|show payment_method']], function () {
+    Route::post('metodos-de-pago', 'PaymentMethodsController@store')->middleware('permission:create payment_method');
+    Route::put('metodos-de-pago/{id}', 'PaymentMethodsController@update')->middleware('permission:edit payment_method');
+    Route::delete('metodos-de-pago/{id}', 'PaymentMethodsController@destroy')->middleware('permission:destroy payment_method');
+    Route::get('metodos-de-pago', 'PaymentMethodsController@index');
+    Route::get('metodos-de-pago/{id}', 'PaymentMethodsController@show');
+});
+     
