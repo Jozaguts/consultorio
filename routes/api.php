@@ -43,8 +43,16 @@ Route::group(['middleware' => ['auth:api', 'role_or_permission:Admin|index user|
 
 Route::group(['middleware' => ['auth:api', 'role_or_permission:Admin|index cash_out|show cash_out']], function () {
         Route::post('cortes', 'CashOutController@store')->middleware('permission:create cash_out');
-        Route::put('cortes/{id}', 'CashOutController@update')->middleware('permission:create cash_out');
+        Route::put('cortes/{id}', 'CashOutController@update')->middleware('permission:edit cash_out');
         Route::delete('cortes/{id}', 'CashOutController@destroy')->middleware('permission:destroy cash_out');
         Route::get('cortes', 'CashOutController@index');
         Route::get('cortes/{id}', 'CashOutController@show');
+});
+
+Route::group(['middleware' => ['auth:api', 'role_or_permission:Admin|index patients|show patients']], function () {
+    Route::post('pacientes', 'PatientsController@store')->middleware('permission:create patients');
+    Route::put('pacientes/{id}', 'PatientsController@update')->middleware('permission:edit patients');
+    Route::delete('pacientes/{id}', 'PatientsController@destroy')->middleware('permission:destroy patients');
+    Route::get('pacientes', 'PatientsController@index');
+    Route::get('pacientes/{id}', 'PatientsController@show');
 });
