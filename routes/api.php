@@ -20,7 +20,8 @@ Route::post('register', 'AuthenticationController@register');
 Route::apiResource('especialidades', 'EspecialidadController')->middleware('auth:api');
 Route::apiResource('doctor', 'DoctorController')->middleware('auth:api');
 Route::apiResource('horarios','ScheduleController')->middleware('auth:api');
-Route::apiResource('especialidad', 'EspecialidadController')->middleware('auth:api');
+Route::apiResource('consultas', 'ConsultationsController')->middleware('auth:api');
+
 
 /* 
 ******************************** FALTAN LAS RUTAS DE ELIMINAR
