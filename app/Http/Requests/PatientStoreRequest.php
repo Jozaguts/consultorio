@@ -13,7 +13,7 @@ class PatientStoreRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,16 @@ class PatientStoreRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'first_name' => 'required',
+            'last_name' => 'required',
+            'second_last_name' => 'required',
+            'age' => 'required',
+            'height' => 'required',
+            'address' => 'required',
+            'phone' => 'required',
+            'contact' => 'required',
+            'contact_phone' => 'required',
+            'consulting_room_id' => 'required'
         ];
     }
 }

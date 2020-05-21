@@ -40,6 +40,14 @@ class PermissionsTableSeeder extends Seeder
         Permission::create(['name' => 'create cash_out']);
         Permission::create(['name' => 'destroy cash_out']);
 
+        //Permisos para pacientes
+
+        Permission::create(['name' => 'index patient']);
+        Permission::create(['name' => 'edit patient']);
+        Permission::create(['name' => 'show patient']);
+        Permission::create(['name' => 'create patient']);
+        Permission::create(['name' => 'destroy patient']);
+
         //Admin
         $admin = Role::create(['name' => 'Admin']);
 
@@ -62,7 +70,9 @@ class PermissionsTableSeeder extends Seeder
             'index user',
             'show user',
             'index cash_out',
-            'show cash_out', 
+            'show cash_out',
+            'index patient',
+            'show patient',  
         ]);
 
         //User Admin
