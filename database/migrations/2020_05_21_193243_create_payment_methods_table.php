@@ -18,6 +18,7 @@ class CreatePaymentMethodsTable extends Migration
             $table->string('name');
             $table->unsignedBigInteger('consulting_room_id');
             $table->foreign('consulting_room_id')->references('id')->on('consulting_rooms');
+            $table->softDeletes();
             $table->timestamps();
         });
     }
