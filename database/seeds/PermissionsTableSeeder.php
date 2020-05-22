@@ -55,6 +55,14 @@ class PermissionsTableSeeder extends Seeder
         Permission::create(['name' => 'create payment_method']);
         Permission::create(['name' => 'destroy payment_method']);
 
+        //permisos para pagos
+        Permission::create(['name' => 'index payment']);
+        Permission::create(['name' => 'edit payment']);
+        Permission::create(['name' => 'show payment']);
+        Permission::create(['name' => 'create payment']);
+        Permission::create(['name' => 'destroy payment']);
+
+
         //fin de lista de permisos
         /* 
         ********************************
@@ -88,7 +96,9 @@ class PermissionsTableSeeder extends Seeder
             'index patient',
             'show patient',
             'index payment_method',
-            'show payment_method',  
+            'show payment_method',
+            'index payment',
+            'show payment',  
         ]);
 
         //User Admin
