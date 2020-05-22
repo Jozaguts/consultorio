@@ -72,3 +72,10 @@ Route::group(['middleware' => ['auth:api', 'role_or_permission:Admin|index payme
         Route::get('pagos', 'PaymentController@index');
         Route::get('pagos/{id}', 'PaymentController@show');
 });
+Route::group(['middleware' => ['auth:api', 'role_or_permission:Admin|index payment_detail|show payment_detail']], function () {
+        Route::post('detalles-de-pago', 'PaymentDetailController@store')->middleware('permission:create payment_detail');
+        Route::put('detalles-de-pago/{id}', 'PaymentDetailController@update')->middleware('permission:edit payment_detail');
+        Route::delete('detalles-de-pago/{id}', 'PaymentDetailController@destroy')->middleware('permission:destroy payment_detail');
+        Route::get('detalles-de-pago', 'PaymentDetailController@index');
+        Route::get('detalles-de-pago/{id}', 'PaymentDetailController@show');
+});
