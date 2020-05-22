@@ -24,11 +24,11 @@ class PaymentUpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            'cash_out_id' => 'exists:cash_outs',
+            'cash_out_id' => 'exists:cash_outs,id',
             'date' => 'string',
             'amount' => 'min:1',
-            'payment_method_id' => 'exists:payment_methods',
-            'consulting_room_id' => 'exists:consulting_rooms',
+            'payment_method_id' => 'exists:payment_methods,id',
+            'consulting_room_id' => 'exists:consulting_rooms,id',
         ];
     }
 }
