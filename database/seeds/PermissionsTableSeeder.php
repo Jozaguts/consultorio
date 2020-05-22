@@ -69,6 +69,13 @@ class PermissionsTableSeeder extends Seeder
         Permission::create(['name' => 'create payment_detail']);
         Permission::create(['name' => 'destroy payment_detail']);
 
+        //permisos para citas
+        Permission::create(['name' => 'index appointment']);
+        Permission::create(['name' => 'edit appointment']);
+        Permission::create(['name' => 'show appointment']);
+        Permission::create(['name' => 'create appointment']);
+        Permission::create(['name' => 'destroy appointment']);
+
 
         //fin de lista de permisos
         /* 
@@ -108,10 +115,12 @@ class PermissionsTableSeeder extends Seeder
             'show payment',
             'index payment_detail',
             'show payment_detail',
+            'index appointment',
+            'show appointment',
         ]);
 
         //User Admin
-        $user = User::find(1);  
+        $user = User::find(1);
         $user->assignRole('Admin');
         $guest = User::find(2);
         $guest->assignRole('Guest');
