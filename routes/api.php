@@ -79,3 +79,10 @@ Route::group(['middleware' => ['auth:api', 'role_or_permission:Admin|index payme
         Route::get('detalles-de-pago', 'PaymentDetailController@index');
         Route::get('detalles-de-pago/{id}', 'PaymentDetailController@show');
 });
+Route::group(['middleware' => ['auth:api', 'role_or_permission:Admin|index appointment|show appointment']], function () {
+        Route::post('citas', 'AppointmentController@store')->middleware('permission:create appointment');
+        Route::put('citas/{id}', 'AppointmentController@update')->middleware('permission:edit appointment');
+        Route::delete('citas/{id}', 'AppointmentController@destroy')->middleware('permission:destroy appointment');
+        Route::get('citas', 'AppointmentController@index');
+        Route::get('citas/{id}', 'AppointmentController@show');
+});
