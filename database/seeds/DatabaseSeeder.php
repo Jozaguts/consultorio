@@ -19,11 +19,16 @@ class DatabaseSeeder extends Seeder
         $this->call(PatientsTableSeeder::class);
         $this->call(DoctorSeeder::class);
         $this->call(ConsultationSeeder::class);
+<<<<<<< HEAD
         $this->call(PaymentMethodTableSeeder::class);
         $this->call(PaymentSeederTable::class);
         $this->call(PaymentDetailsTableSeeder::class);
         $this->call(AppointmentTableSeeder::class);
         
+=======
+        $this->call(RecipieSeeder::class);
+        $this->call(RecipieDetailSeeder::class);
+>>>>>>> Crud recetas y recetas_det
     }
 
 }
