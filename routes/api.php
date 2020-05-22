@@ -21,6 +21,8 @@ Route::apiResource('especialidades', 'EspecialidadController')->middleware('auth
 Route::apiResource('doctor', 'DoctorController')->middleware('auth:api');
 Route::apiResource('horarios','ScheduleController')->middleware('auth:api');
 Route::apiResource('consultas', 'ConsultationsController')->middleware('auth:api');
+Route::apiResource('recetas', 'RecipiesController')->middleware('auth:api');
+Route::apiResource('recetasdetalles', 'RecipiesDetailsController')->middleware('auth:api');
 
 
 /* 
