@@ -9,6 +9,6 @@ class PaymentDetail extends Model
 {
     use SoftDeletes;
     protected $table = 'payment_details';
-    protected $field = ['payment_id', 'consultation_id', 'amount'];
+    protected $fillable = ['payment_id', 'consultation_id', 'amount'];
     
 }

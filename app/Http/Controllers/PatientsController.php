@@ -23,9 +23,9 @@ class PatientsController extends Controller
     {
         try {
             $patient = Patient::find($id);
-            return response()->json(['patient' => $patient]);
+            return response()->json(['patient' => $patient],200);
         } catch (\Throwable $th) {
-            return response()->json(['errors' => $th->getMessage()]);
+            return response()->json(['errors' => $th->getMessage()],400);
         }
     }
 
