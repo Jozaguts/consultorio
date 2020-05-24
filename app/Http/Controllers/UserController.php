@@ -118,4 +118,11 @@ class UserController extends Controller
             return response()->json(['errors' => $th->getMessage()]);
         }
     }
+
+    public function me()
+    {
+        $user = User::find(1);
+
+        return response()->json(['user' => $user]);
+    }
 }

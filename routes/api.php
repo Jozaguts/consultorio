@@ -42,6 +42,7 @@ Route::group(['middleware' => ['auth:api', 'role_or_permission:Admin|index user|
         Route::put('usuarios/{id}', 'UserController@update')->middleware('permission:edit user');
         Route::get('usuarios', 'UserController@index');
         Route::get('usuarios/{id}', 'UserController@show');
+        Route::get('usuarios/me', 'UserController@me');
 });
 
 Route::group(['middleware' => ['auth:api', 'role_or_permission:Admin|index cash_out|show cash_out']], function () {
