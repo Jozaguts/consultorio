@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::post('login', 'AuthenticationController@login')->name('api-login');
 Route::post('register', 'AuthenticationController@register');
+Route::get('usuarios/current', 'UserController@current')->middleware('auth:api');
 
 Route::apiResource('especialidades', 'EspecialidadController')->middleware('auth:api');
 Route::apiResource('doctor', 'DoctorController')->middleware('auth:api');
@@ -42,7 +43,6 @@ Route::group(['middleware' => ['auth:api', 'role_or_permission:Admin|index user|
         Route::put('usuarios/{id}', 'UserController@update')->middleware('permission:edit user');
         Route::get('usuarios', 'UserController@index');
         Route::get('usuarios/{id}', 'UserController@show');
-        Route::get('usuarios/me', 'UserController@me');
 });
 
 Route::group(['middleware' => ['auth:api', 'role_or_permission:Admin|index cash_out|show cash_out']], function () {

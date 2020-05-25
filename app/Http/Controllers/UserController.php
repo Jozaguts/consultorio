@@ -119,10 +119,15 @@ class UserController extends Controller
         }
     }
 
-    public function me()
+    public function current()
     {
-        $user = User::find(1);
+        try {
+            $user = User::find(auth()->user()->id)->first(['first_name','email']);
+            return response()->json(['user' => $user],200);
+            
+        } catch (\Throwable $th) {
+            return response()->json(['errors' => $th->getMessage(),400]);
+        }
 
-        return response()->json(['user' => $user]);
     }
 }
