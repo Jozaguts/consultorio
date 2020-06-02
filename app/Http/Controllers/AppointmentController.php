@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Appointment;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\DB;
 
 class AppointmentController extends Controller
 {
@@ -109,5 +111,26 @@ class AppointmentController extends Controller
         } catch (\Throwable $th) {
             return response()->json(['errors' => $th->getMessage()], 400);
         }
+    }
+
+    public function getCurrentWeekAppointments()
+    {
+        $keys = array('l', 'm', 'x', 'j', 'v', 's', 'd');
+        $mondayOfCurrentWeek = now()->startOfWeek();
+
+
+        for ($i = 0; $i <= 6; $i++) {
+            $appointmentOfWeekCount[] = DB::table('appointments')
+                ->where('date', $mondayOfCurrentWeek->addDays($i)
+                    ->toDateString())
+                ->count();
+            $mondayOfCurrentWeek->subDays($i);
+        }
+        $data = array_combine($keys, $appointmentOfWeekCount);
+        return response()->json(['data' => $data], 200);
+    }
+
+    public function getCustomWeekAppointments($dayOfWeek)
+    {
     }
 }
